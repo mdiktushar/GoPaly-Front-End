@@ -1,9 +1,64 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faG } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../../providers/FirebaseAuthProvider";
+import isEmail from "validator/lib/isEmail";
 
 const Register = () => {
   const [errorMessage, setError] = useState("");
+  const { createUser, profileInfo, googleLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const goTo = `/`;
+
+  const registerHandler = (event) => {
+    event.preventDefault()
+    console.log('tushar');
+
+    setError("");
+    const form = event.target;
+
+    const name = form.name.value;
+    const email = form.email.value;
+    const photo = form.photoURL.value;
+    const password = form.password.value;
+
+    if (email.length == 0) {
+      setError('Please Enter Email')
+      return
+    }
+    if (password.length < 6) {
+      setError(`Password can't be less than 6 letters`)
+      return
+    }
+    if (!isEmail(email)) {
+      setError("Not an Email");
+      return;
+    }
+    // console.log(name, email, photo, password);
+
+    createUser(email, password)
+      .then((userCredential) => {
+        // adding display name and photo
+        profileInfo(name, photo);
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        // ...
+        navigate(goTo, { replace: true });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(error.message);
+      });
+
+  }
+
+
 
   return (
     <div className="hero bg-gray-100 rounded-lg">
@@ -20,7 +75,7 @@ const Register = () => {
           </p>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm bg-white my-10">
-          <form className="card-body">
+          <form onSubmit={registerHandler} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -39,7 +94,7 @@ const Register = () => {
               <input
                 name="photoURL"
                 type="text"
-                placeholder="photo-URL"
+                placeholder="photoURL"
                 className="input input-bordered"
               />
             </div>
@@ -71,6 +126,11 @@ const Register = () => {
               </button>
             </div>
           </form>
+          <button className="btn btn-circle btn-outline m-auto mb-3"
+            onClick={() => googleLogin(navigate, goTo)}
+          >
+            <FontAwesomeIcon icon={faG} />
+          </button>
         </div>
       </div>
     </div>

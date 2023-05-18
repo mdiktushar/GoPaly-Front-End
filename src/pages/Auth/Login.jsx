@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faG } from '@fortawesome/free-solid-svg-icons'
 
 const Login = () => {
   const [errorMessage, setError] = useState("");
@@ -46,9 +48,14 @@ const Login = () => {
               />
             </div>
             <div className="form-control mt-6">
-              <button type="submit" className="btn btn-primary">Login</button>
+              <button type="submit" className="btn btn-primary">
+                Login
+              </button>
             </div>
           </form>
+          <button className="btn btn-circle btn-outline m-auto mb-3">
+            <FontAwesomeIcon icon={faG} />
+          </button>
         </div>
       </div>
     </div>
