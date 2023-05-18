@@ -1,31 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../../assets/logo.png";
 import { NavLink, Link } from "react-router-dom";
+import { AuthContext } from "../../../providers/FirebaseAuthProvider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+
 const NavBar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const logOutHandler = async () => {
+    await logOut()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const link = (
     <>
-      {/* <li tabIndex={0}>
-              <NavLink className="justify-between">
-                Parent
-                <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                </svg>
-              </NavLink>
-              <ul className="p-2">
-                <li>
-                  <NavLink>Submenu 1</NavLink>
-                </li>
-                <li>
-                  <NavLink>Submenu 2</NavLink>
-                </li>
-              </ul>
-            </li> */}
       <li>
         <NavLink
           className={`bg-white hover:bg-slate-200 text-gray-600 font-semibold`}
@@ -33,24 +25,28 @@ const NavBar = () => {
         >
           Home
         </NavLink>
-        </li>
+      </li>
 
-        <li>
-        <NavLink
-          className={`bg-white hover:bg-slate-200 text-gray-600 font-semibold`}
-          to={`/mytoys`}
-        >
-          My Toys
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className={`bg-white hover:bg-slate-200 text-gray-600 font-semibold`}
-          to={`/addtoy`}
-        >
-          Add A Toy
-        </NavLink>
-      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink
+              className={`bg-white hover:bg-slate-200 text-gray-600 font-semibold`}
+              to={`/mytoys`}
+            >
+              My Toys
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={`bg-white hover:bg-slate-200 text-gray-600 font-semibold`}
+              to={`/addtoy`}
+            >
+              Add A Toy
+            </NavLink>
+          </li>
+        </>
+      )}
 
       <li>
         <NavLink
@@ -98,7 +94,40 @@ const NavBar = () => {
         <ul className="menu menu-horizontal px-1">{link}</ul>
       </div>
       <div className="navbar-end">
-        <Link className="btn btn-outline btn-success" to={`/login`}>Login</Link>
+        {user ? (
+          <div className="dropdown dropdown-end bg-white">
+            <label
+              tabIndex="0"
+              className="btn btn-circle border-none m-1 bg-white  hover:bg-white"
+              data-toggle="tooltip"
+              title={user?.displayName || "No Name"}
+            >
+              <div className="avatar">
+                <div className="w-12 rounded-full">
+                  {user?.photoURL ? (
+                    <img src={user.photoURL} alt="" />
+                  ) : (
+                    <FontAwesomeIcon icon={faUser} size="2x" />
+                  )}
+                </div>
+              </div>
+            </label>
+            <ul
+              tabIndex="0"
+              className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 bg-white"
+            >
+              <li>
+                <button onClick={logOutHandler} className="bg-white">
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <Link className="btn btn-outline btn-success" to={`/login`}>
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );
