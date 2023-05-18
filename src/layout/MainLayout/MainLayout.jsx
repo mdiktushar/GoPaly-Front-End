@@ -5,7 +5,7 @@ import NavBar from "../../pages/shared/NavBar/NavBar";
 
 const MainLayout = () => {
   return (
-    <div style={{maxWidth: 1250}} className="m-auto">
+    <div style={{maxWidth: 1250}} className="m-auto min-h-screen">
       <NavBar />
       <Outlet />
       <Footer />
