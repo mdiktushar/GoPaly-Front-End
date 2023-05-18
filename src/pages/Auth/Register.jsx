@@ -15,8 +15,8 @@ const Register = () => {
   const goTo = `/`;
 
   const registerHandler = (event) => {
-    event.preventDefault()
-    console.log('tushar');
+    event.preventDefault();
+    console.log("tushar");
 
     setError("");
     const form = event.target;
@@ -27,12 +27,12 @@ const Register = () => {
     const password = form.password.value;
 
     if (email.length == 0) {
-      setError('Please Enter Email')
-      return
+      setError("Please Enter Email");
+      return;
     }
     if (password.length < 6) {
-      setError(`Password can't be less than 6 letters`)
-      return
+      setError(`Password can't be less than 6 letters`);
+      return;
     }
     if (!isEmail(email)) {
       setError("Not an Email");
@@ -55,10 +55,7 @@ const Register = () => {
         const errorMessage = error.message;
         setError(error.message);
       });
-
-  }
-
-
+  };
 
   return (
     <div className="hero bg-gray-100 rounded-lg">
@@ -126,7 +123,8 @@ const Register = () => {
               </button>
             </div>
           </form>
-          <button className="btn btn-circle btn-outline m-auto mb-3"
+          <button
+            className="btn btn-circle btn-outline m-auto mb-3"
             onClick={() => googleLogin(navigate, goTo)}
           >
             <FontAwesomeIcon icon={faG} />

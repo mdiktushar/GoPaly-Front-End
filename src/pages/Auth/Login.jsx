@@ -1,11 +1,52 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faG } from '@fortawesome/free-solid-svg-icons'
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faG } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../../providers/FirebaseAuthProvider";
+import isEmail from "validator/es/lib/isEmail";
 
 const Login = () => {
+  const { singIn, googleLogin } = useContext(AuthContext);
   const [errorMessage, setError] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const goTo = location.state?.from?.pathname || `/`;
+
+  const loginHandler = (event) => {
+    event.preventDefault();
+    setError("");
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    if (email.length == 0) {
+      setError("Please Enter Email");
+      return;
+    }
+    if (password.length < 6) {
+      setError(`Password can't be less than 6 letters`);
+      return;
+    }
+    if (!isEmail(email)) {
+      setError("Not an Email");
+      return;
+    }
+    singIn(email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log("Login Successful: ", user);
+        navigate(goTo, { replace: true });
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(error.message);
+      });
+  };
 
   return (
     <div className="hero bg-gray-100 rounded-lg">
@@ -24,7 +65,7 @@ const Login = () => {
           </p>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm bg-white my-10">
-          <form className="card-body">
+          <form onSubmit={loginHandler} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -53,7 +94,10 @@ const Login = () => {
               </button>
             </div>
           </form>
-          <button className="btn btn-circle btn-outline m-auto mb-3">
+          <button
+            className="btn btn-circle btn-outline m-auto mb-3"
+            onClick={() => googleLogin(navigate, goTo)}
+          >
             <FontAwesomeIcon icon={faG} />
           </button>
         </div>
