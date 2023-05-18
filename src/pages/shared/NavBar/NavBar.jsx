@@ -114,7 +114,7 @@ const NavBar = () => {
             </label>
             <ul
               tabIndex="0"
-              className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 bg-white"
+              className="dropdown-content menu p-2 shadow rounded-box w-52 bg-white"
             >
               <li>
                 <button onClick={logOutHandler} className="bg-white">
