@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../providers/FirebaseAuthProvider";
 
 const AddToy = () => {
-  const addToyHandler = (event) => {
+  const { user } = useContext(AuthContext);
+
+  const addToyHandler = async (event) => {
     event.preventDefault();
     const form = event.target;
     const toy = form.toy.value;
@@ -13,7 +16,7 @@ const AddToy = () => {
     const rating = form.rating.value;
     const quantity = form.quantity.value;
     const details = form.details.value;
-    console.log(
+    const addToy = {
       toy,
       photo,
       sellerName,
@@ -22,9 +25,24 @@ const AddToy = () => {
       price,
       rating,
       quantity,
-      details
-    );
+      details,
+    };
+
+    await fetch(`${import.meta.env.VITE_ULR}/toy`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(addToy),
+    })
+      .then((req) => req.json())
+      .then((data) => {
+        if (data.insertedId) {
+          alert("Toy Added Successfully");
+        }
+      });
   };
+
   return (
     <div>
       <h2 className="text-center text-8xl">Add your Toy</h2>
@@ -44,6 +62,7 @@ const AddToy = () => {
               type="text"
               name="toy"
               placeholder="Toy Name"
+              required
               className="input input-bordered w-full max-w-xs"
             />
             {/* PhotoURL */}
@@ -51,6 +70,7 @@ const AddToy = () => {
               <span className="label-text">PhotoURL</span>
             </label>
             <input
+              required
               type="text"
               name="photo"
               placeholder="PhotoURL"
@@ -61,8 +81,10 @@ const AddToy = () => {
               <span className="label-text">Seller Name</span>
             </label>
             <input
+              required
               type="text"
               name="seller"
+              defaultValue={user?.displayName}
               placeholder="Seller Name"
               className="input input-bordered w-full max-w-xs"
             />
@@ -71,8 +93,10 @@ const AddToy = () => {
               <span className="label-text">Email</span>
             </label>
             <input
+              required
               type="text"
               name="email"
+              defaultValue={user.email}
               placeholder="Email"
               className="input input-bordered w-full max-w-xs"
             />
@@ -80,19 +104,12 @@ const AddToy = () => {
             <label className="label">
               <span className="label-text">Category</span>
             </label>
-            {/* <input
-              type="text"
-              name="category "
-              placeholder="Category "
-              className="input input-bordered w-full max-w-xs"
-            /> */}
-
             <select
               name="category"
               className="select select-ghost w-full max-w-xs"
-              defaultValue={'others'}
+              defaultValue={"others"}
             >
-              <option value={`others`} disabled >
+              <option value={`others`} disabled>
                 Toy Category
               </option>
               <option value={`mickey & friends`}>Mickey & Friends</option>
@@ -105,6 +122,7 @@ const AddToy = () => {
               <span className="label-text">Price</span>
             </label>
             <input
+              required
               type="num"
               name="price"
               placeholder="Price"
@@ -115,6 +133,7 @@ const AddToy = () => {
               <span className="label-text">Rating</span>
             </label>
             <input
+              required
               type="number"
               name="rating"
               placeholder="Rating"
@@ -125,6 +144,7 @@ const AddToy = () => {
               <span className="label-text">Quantity</span>
             </label>
             <input
+              required
               type="number"
               name="quantity"
               placeholder="Quantity"
@@ -136,6 +156,7 @@ const AddToy = () => {
               <span className="label-text">Details</span>
             </label>
             <textarea
+              required
               className="textarea textarea-bordered h-24"
               name="details"
               placeholder="Details"
