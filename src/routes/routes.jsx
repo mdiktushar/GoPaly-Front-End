@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute";
 import AddToy from "../pages/AddToy/AddToy";
 import AllToy from "../pages/AllToy/AllToy";
 import Details from "../pages/Details/Details";
+import { async } from "@firebase/util";
 
 const routes = createBrowserRouter([
   {
@@ -42,7 +43,7 @@ const routes = createBrowserRouter([
       {
         path: `/all-toy`,
         element: <AllToy />,
-        loader: () => fetch(`${import.meta.env.VITE_ULR}/toys`),
+        loader: async() => await fetch(`${import.meta.env.VITE_ULR}/toys`),
       },
       {
         path: "/details/:id",
@@ -51,6 +52,7 @@ const routes = createBrowserRouter([
             <Details />
           </PrivateRoute>
         ),
+        loader: async({params})=> await fetch(`${import.meta.env.VITE_ULR}/toy/${params.id}`)
       },
     ],
   },

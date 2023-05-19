@@ -1,19 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ToyCurt = ({ toy }) => {
+const ToyCurt = ({ Toy }) => {
 
-    const {_id, photo, toyName, seller, email, category, price, quantity, details, rating} = toy
+    const {_id, photo, toy, sellerName, email, category, price, quantity, details, rating} = Toy
   return (
-    <div className="card card-side bg-base-100 shadow-xl">
+    <div className="card card-side bg-gray-300 text-gray-700 shadow-xl border">
       <figure>
         <img
           src={photo}
-          className="object-cover h-48 w-96"
+          className="object-cover h-48 w-96 rounded-lg ms-1"
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{toyName}</h2>
+        <h2 className="card-title">{toy}</h2>
         <p>Category: {category}</p>
         <p>Price: {price}</p>
         <p>Rating: {rating}</p>
