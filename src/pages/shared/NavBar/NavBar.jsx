@@ -26,6 +26,14 @@ const NavBar = () => {
           Home
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          className={`bg-white hover:bg-slate-200 text-gray-600 font-semibold`}
+          to={`/all-toy`}
+        >
+          All Toys
+        </NavLink>
+      </li>
 
       {user && (
         <>
