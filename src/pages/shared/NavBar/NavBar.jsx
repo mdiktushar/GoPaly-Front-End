@@ -40,7 +40,7 @@ const NavBar = () => {
           <li>
             <NavLink
               className={`bg-white hover:bg-slate-200 text-gray-600 font-semibold`}
-              to={`/addtoy`}
+              to={`/add-toy`}
             >
               Add A Toy
             </NavLink>
