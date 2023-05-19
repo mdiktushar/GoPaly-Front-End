@@ -42,7 +42,7 @@ const routes = createBrowserRouter([
       {
         path: `/all-toy`,
         element: <AllToy />,
-        loader: () => fetch("./data/disney.json"),
+        loader: () => fetch(`${import.meta.env.VITE_ULR}/toys`),
       },
       {
         path: "/details/:id",

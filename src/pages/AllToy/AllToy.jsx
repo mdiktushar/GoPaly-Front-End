@@ -8,7 +8,7 @@ const AllToy = () => {
   const data = useLoaderData();
   let temp = data.slice(0, 20);
   const [toys, setToys] = useState(temp);
-
+  // console.log(data);
   const showAllHandler = () => {
     setToys(data);
   };
@@ -28,7 +28,8 @@ const AllToy = () => {
       </div>
       
     {
-        toys.map(toy => <ToyCurt toy={toy} />)
+      
+        toys.map(toy => <ToyCurt key={toy._id} toy={toy} />)
     }
 
       <button onClick={showAllHandler} className="btn btn-info">

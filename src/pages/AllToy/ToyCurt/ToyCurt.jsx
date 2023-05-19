@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ToyCurt = ({ toy }) => {
 
-    const {id, photo, toyName, seller, email, category, price, quantity, details, rating} = toy
+    const {_id, photo, toyName, seller, email, category, price, quantity, details, rating} = toy
   return (
     <div className="card card-side bg-base-100 shadow-xl">
       <figure>
@@ -18,7 +18,7 @@ const ToyCurt = ({ toy }) => {
         <p>Price: {price}</p>
         <p>Rating: {rating}</p>
         <div className="card-actions justify-end">
-          <Link to={`/details/${id}`}><button className="btn btn-primary">Details</button></Link>
+          <Link to={`/details/${_id}`}><button className="btn btn-primary">Details</button></Link>
         </div>
       </div>
     </div>
