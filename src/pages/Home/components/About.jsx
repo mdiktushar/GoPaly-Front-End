@@ -1,10 +1,10 @@
 import React from "react";
 
-const Welcome = () => {
+const About = () => {
   return (
     <>
       <h2 className="text-5xl font-semibold text-gray-600 text-center mt-10">
-        Welcome
+        About US
       </h2>
       <hr />
       <p className="text-center mt-10">
@@ -23,4 +23,4 @@ const Welcome = () => {
   );
 };
 
-export default Welcome;
+export default About;

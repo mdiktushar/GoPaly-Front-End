@@ -1,18 +1,19 @@
 import React from 'react';
 import Banner from './components/Banner';
 import Gallery from './components/gallery';
-import Welcome from './components/Welcome';
+import About from './components/About';
 import FeedBack from './components/FeedBack';
+import ShowByCategory from './components/ShowByCategory';
 
 const Home = () => {
     return (
         <>
         <Banner />
-        <Welcome />
         <Gallery />
         <div id='body'>
-            
+            <ShowByCategory />
         </div>
+        <About />
         <FeedBack />
         </>
     );
