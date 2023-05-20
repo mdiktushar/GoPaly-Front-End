@@ -3,7 +3,6 @@ import { AuthContext } from "../../providers/FirebaseAuthProvider";
 import { useLoaderData, useNavigate } from "react-router-dom";
 
 const UpdateToy = () => {
-  const { user } = useContext(AuthContext);
   const navigate = useNavigate()
   const Toy = useLoaderData();
   const {
