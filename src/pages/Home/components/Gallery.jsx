@@ -9,7 +9,7 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div className="mt-20 bg-slate-100 rounded-xl">
+    <div className="mt-20 bg-slate-100 rounded-xl p-3">
       <h2 className="text-5xl font-semibold text-gray-600 text-center">
         Gallery
       </h2>
