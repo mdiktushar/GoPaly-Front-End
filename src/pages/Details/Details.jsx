@@ -1,8 +1,10 @@
 import React from "react";
 import { useLoaderData } from "react-router";
+import useTitle from "../../hooks/useTitle";
 
 const Details = () => {
   const Toy = useLoaderData();
+
   const {
     _id,
     photo,
@@ -15,7 +17,9 @@ const Details = () => {
     details,
     rating,
   } = Toy;
-  console.log(Toy);
+
+  useTitle(`${toy} Details`);
+
   return (
     <div className="hero min-h-screen shadow-xl text-gray-700">
       <div className="hero-content flex-col lg:flex-row-reverse">

@@ -5,12 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faG } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../../providers/FirebaseAuthProvider";
 import isEmail from "validator/es/lib/isEmail";
+import useTitle from "../../hooks/useTitle";
 
 const Login = () => {
   const { singIn, googleLogin } = useContext(AuthContext);
   const [errorMessage, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+
+  useTitle('Login')
 
   const goTo = location.state?.from?.pathname || `/`;
 

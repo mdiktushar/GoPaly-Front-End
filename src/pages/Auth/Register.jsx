@@ -5,19 +5,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faG } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../../providers/FirebaseAuthProvider";
 import isEmail from "validator/lib/isEmail";
+import useTitle from "../../hooks/useTitle";
 
 const Register = () => {
   const [errorMessage, setError] = useState("");
   const { createUser, profileInfo, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
-  const location = useLocation();
+
+  useTitle('Register')
 
   const goTo = `/`;
 
   const registerHandler = (event) => {
     event.preventDefault();
-    console.log("tushar");
-
     setError("");
     const form = event.target;
 

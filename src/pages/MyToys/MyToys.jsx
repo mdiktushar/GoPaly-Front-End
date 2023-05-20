@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/FirebaseAuthProvider";
 import MyToy from "./MyToy/MyToy";
+import useTitle from "../../hooks/useTitle";
 
 const MyToys = () => {
   const { user } = useContext(AuthContext);
   const [url, setUrl] = useState(
     `${import.meta.env.VITE_ULR}/my-toys?email=${user.email}`
   );
+  useTitle(`My Toys`)
   const [Toys, setToys] = useState([]);
 
   const deleteHandler = (id) => {

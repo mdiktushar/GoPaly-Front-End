@@ -3,11 +3,14 @@ import { useLoaderData } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import ToyCurt from "./ToyCurt/ToyCurt";
+import useTitle from "../../hooks/useTitle";
 
 const AllToy = () => {
   const data = useLoaderData();
   let temp = data.slice(0, 20);
   const [toys, setToys] = useState(temp);
+
+  useTitle('All Toys')
 
   const showAllHandler = () => {
     setToys(data);

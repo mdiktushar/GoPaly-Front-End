@@ -1,20 +1,16 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../providers/FirebaseAuthProvider";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import useTitle from "../../hooks/useTitle";
 
 const UpdateToy = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const Toy = useLoaderData();
-  const {
-    _id,
-    photo,
-    toy,
-    price,
-    quantity,
-    details,
-  } = Toy;
+  const { _id, photo, toy, price, quantity, details } = Toy;
 
-  const updateHandler = async(event) => {
+  useTitle(`${toy} Update`);
+
+  const updateHandler = async (event) => {
     event.preventDefault();
     const form = event.target;
     const price = form.price.value;
@@ -26,18 +22,19 @@ const UpdateToy = () => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ price: price,
-    quantity: quantity,
-    details: details
-    }),
+      body: JSON.stringify({
+        price: price,
+        quantity: quantity,
+        details: details,
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         if (data.modifiedCount) {
-            alert("Toy Updated");
-            navigate(`/mytoys`, { replace: true });
-          }
+          alert("Toy Updated");
+          navigate(`/mytoys`, { replace: true });
+        }
       });
   };
   return (

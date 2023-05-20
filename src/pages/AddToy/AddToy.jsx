@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../providers/FirebaseAuthProvider";
 import { useNavigate } from "react-router-dom";
+import useTitle from "../../hooks/useTitle";
 
 const AddToy = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  useTitle('Add Toys')
 
   const addToyHandler = async (event) => {
     event.preventDefault();
