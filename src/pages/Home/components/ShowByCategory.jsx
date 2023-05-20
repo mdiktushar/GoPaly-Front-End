@@ -11,9 +11,9 @@ const ShowByCategory = () => {
       <hr className="mb-5" />
       <Tabs>
         <TabList className={"flex items-center justify-center"}>
-          <Tab className={`text-gray-800 font-semibold text-2xl m-2 border p-3`}>Mickey And Friends</Tab>
-          <Tab className={`text-gray-800 font-semibold text-2xl m-2 border p-3`}>Disney Princess</Tab>
-          <Tab className={`text-gray-800 font-semibold text-2xl m-2 border p-3`}>Hundred Acre Wood</Tab>
+          <Tab className={`text-gray-800 font-semibold text-lg m-1 border p-1`}>Mickey And Friends</Tab>
+          <Tab className={`text-gray-800 font-semibold text-lg m-1 border p-1`}>Disney Princess</Tab>
+          <Tab className={`text-gray-800 font-semibold text-lg m-1 border p-1`}>Hundred Acre Wood</Tab>
         </TabList>
 
         <TabPanel>
@@ -21,7 +21,6 @@ const ShowByCategory = () => {
           <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Minnie Mouse</h2>
           <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Donal Duck</h2>
           <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Daisy Duck</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Pluto</h2>
           <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Goofy</h2>
           <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Chip'n'Dale</h2>
           <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Clarabelle</h2>

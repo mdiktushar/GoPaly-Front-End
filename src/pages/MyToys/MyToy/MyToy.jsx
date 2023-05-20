@@ -14,6 +14,9 @@ const MyToy = ({ myToy, deleteHandler }) => {
     details,
     rating,
   } = myToy;
+
+
+  const description = details.slice(0, 25)
   return (
     <>
       <tr className="border-b">
@@ -41,7 +44,8 @@ const MyToy = ({ myToy, deleteHandler }) => {
         </td>
         <td className="bg-white"><p>{category}</p></td>
         <td className="bg-white"><p>{quantity}</p></td>
-        <td className="bg-white"><p>{details}</p></td>
+        <td className="bg-white"  data-toggle="tooltip"
+              title={details}><p>{description}...</p></td>
         <td className="bg-white">
           <p>{price}</p>
           <br />
