@@ -115,7 +115,7 @@ const AddToy = () => {
               <option value={`others`} disabled>
                 Toy Category
               </option>
-              <option value={`mickey & friends`}>Mickey & Friends</option>
+              <option value={`mickey and friends`}>Mickey & Friends</option>
               <option value={`disney princess`}>Disney Princess</option>
               <option value={`hundred acre wood`}>Hundred Acre Wood </option>
             </select>

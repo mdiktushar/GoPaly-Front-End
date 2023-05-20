@@ -9,7 +9,6 @@ import PrivateRoute from "./PrivateRoute";
 import AddToy from "../pages/AddToy/AddToy";
 import AllToy from "../pages/AllToy/AllToy";
 import Details from "../pages/Details/Details";
-import { async } from "@firebase/util";
 import UpdateToy from "../pages/UpdateToy/UpdateToy";
 import MyToys from "../pages/MyToys/MyToys";
 

@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
 const ShowByCategory = () => {
+  const [maf, setMaf] = useState([]);
+  const [princess, setPrincess] = useState([]);
+  const [haw, setHaw] = useState([]);
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_ULR}/category?category=mickey and friends`)
+      .then((res) => res.json())
+      .then((data) => setMaf(data.slice(0, 3)));
+  }, []);
+  
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_ULR}/category?category=disney princess`)
+      .then((res) => res.json())
+      .then((data) => setPrincess(data.slice(0, 3)));
+  }, []);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_ULR}/category?category=hundred acre wood`)
+      .then((res) => res.json())
+      .then((data) => setHaw(data.slice(0, 3)));
+  }, []);
+
+
   return (
     <div className="mt-20">
       <h2 className="text-5xl font-semibold text-gray-600 text-center">
@@ -11,37 +33,32 @@ const ShowByCategory = () => {
       <hr className="mb-5" />
       <Tabs>
         <TabList className={"flex items-center justify-center"}>
-          <Tab className={`text-gray-800 font-semibold text-lg m-1 border p-1`}>Mickey And Friends</Tab>
-          <Tab className={`text-gray-800 font-semibold text-lg m-1 border p-1`}>Disney Princess</Tab>
-          <Tab className={`text-gray-800 font-semibold text-lg m-1 border p-1`}>Hundred Acre Wood</Tab>
+          <Tab className={`text-gray-800 font-semibold text-lg m-1 border p-1`}>
+            Mickey And Friends
+          </Tab>
+          <Tab className={`text-gray-800 font-semibold text-lg m-1 border p-1`}>
+            Disney Princess
+          </Tab>
+          <Tab className={`text-gray-800 font-semibold text-lg m-1 border p-1`}>
+            Hundred Acre Wood
+          </Tab>
         </TabList>
 
         <TabPanel>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Mickey Mouse</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Minnie Mouse</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Donal Duck</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Daisy Duck</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Goofy</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Chip'n'Dale</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Clarabelle</h2>
+          {maf.map((data) => <h2 key={data._id} className="text-xl text-gray-600 flex justify-center items-center m-2">
+            {data.toy}
+          </h2>)}
+          
         </TabPanel>
         <TabPanel>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Tiana</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Jasmine</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Briar Rose</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Cinderella</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Snow White</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Raya</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Belle</h2>
+        {princess.map((data) => <h2 key={data._id} className="text-xl text-gray-600 flex justify-center items-center m-2">
+            {data.toy}
+          </h2>)}
         </TabPanel>
         <TabPanel>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Christopher Robin</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Winnie the Pooh</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Piglet</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Rabbit</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Eeyore</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Owl</h2>
-          <h2 className="text-xl text-gray-600 flex justify-center items-center m-2" >Tigger</h2>
+        {haw.map((data) => <h2 key={data._id} className="text-xl text-gray-600 flex justify-center items-center m-2">
+            {data.toy}
+          </h2>)}
         </TabPanel>
       </Tabs>
     </div>
