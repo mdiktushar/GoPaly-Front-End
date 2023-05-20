@@ -11,6 +11,7 @@ import AllToy from "../pages/AllToy/AllToy";
 import Details from "../pages/Details/Details";
 import { async } from "@firebase/util";
 import UpdateToy from "../pages/UpdateToy/UpdateToy";
+import MyToys from "../pages/MyToys/MyToys";
 
 const routes = createBrowserRouter([
   {
@@ -55,6 +56,14 @@ const routes = createBrowserRouter([
         ),
         loader: async ({ params }) =>
           await fetch(`${import.meta.env.VITE_ULR}/toy/${params.id}`),
+      },
+      {
+        path: `/mytoys`,
+        element: (
+          <PrivateRoute>
+            <MyToys />
+          </PrivateRoute>
+        ),
       },
       {
         path: `/update/:id`,

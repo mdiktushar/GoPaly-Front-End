@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../providers/FirebaseAuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const AddToy = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate()
 
   const addToyHandler = async (event) => {
     event.preventDefault();
@@ -39,6 +41,7 @@ const AddToy = () => {
       .then((data) => {
         if (data.insertedId) {
           alert("Toy Added Successfully");
+          navigate(`/mytoys`, { replace: true })
         }
       });
   };
