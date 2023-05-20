@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import ToyCurt from "../../AllToy/ToyCurt/ToyCurt";
 
 const ShowByCategory = () => {
   const [maf, setMaf] = useState([]);
@@ -11,7 +12,7 @@ const ShowByCategory = () => {
       .then((res) => res.json())
       .then((data) => setMaf(data.slice(0, 3)));
   }, []);
-  
+
   useEffect(() => {
     fetch(`${import.meta.env.VITE_ULR}/category?category=disney princess`)
       .then((res) => res.json())
@@ -23,7 +24,6 @@ const ShowByCategory = () => {
       .then((res) => res.json())
       .then((data) => setHaw(data.slice(0, 3)));
   }, []);
-
 
   return (
     <div className="mt-20">
@@ -44,21 +44,20 @@ const ShowByCategory = () => {
           </Tab>
         </TabList>
 
-        <TabPanel>
-          {maf.map((data) => <h2 key={data._id} className="text-xl text-gray-600 flex justify-center items-center m-2">
-            {data.toy}
-          </h2>)}
-          
+        <TabPanel className="max-w-sm m-auto">
+          {maf.map((data) => (
+            <ToyCurt key={data._id} Toy={data} />
+          ))}
         </TabPanel>
-        <TabPanel>
-        {princess.map((data) => <h2 key={data._id} className="text-xl text-gray-600 flex justify-center items-center m-2">
-            {data.toy}
-          </h2>)}
+        <TabPanel className="max-w-sm m-auto">
+          {princess.map((data) => (
+            <ToyCurt key={data._id} Toy={data} />
+          ))}
         </TabPanel>
-        <TabPanel>
-        {haw.map((data) => <h2 key={data._id} className="text-xl text-gray-600 flex justify-center items-center m-2">
-            {data.toy}
-          </h2>)}
+        <TabPanel className="max-w-sm m-auto">
+          {haw.map((data) => (
+            <ToyCurt key={data._id} Toy={data} />
+          ))}
         </TabPanel>
       </Tabs>
     </div>

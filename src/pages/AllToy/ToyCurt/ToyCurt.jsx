@@ -2,13 +2,26 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ToyCurt = ({ Toy }) => {
-
-    const {_id, photo, toy, sellerName, email, category, price, quantity, details, rating} = Toy
+  const {
+    _id,
+    photo,
+    toy,
+    sellerName,
+    email,
+    category,
+    price,
+    quantity,
+    details,
+    rating,
+  } = Toy;
   return (
     <div className="card card-side bg-gray-300 text-gray-700 shadow-xl border">
       <figure>
         <img
-          src={photo}
+          src={
+            Toy?.photo ||
+            `https://static.vecteezy.com/system/resources/previews/017/395/533/original/disney-logo-editorial-free-vector.jpg`
+          }
           className="object-cover h-48 w-96 rounded-lg ms-1"
         />
       </figure>
@@ -18,7 +31,9 @@ const ToyCurt = ({ Toy }) => {
         <p>Price: {price}</p>
         <p>Rating: {rating}</p>
         <div className="card-actions justify-end">
-          <Link to={`/details/${_id}`}><button className="btn btn-primary">Details</button></Link>
+          <Link to={`/details/${_id}`}>
+            <button className="btn btn-primary">Details</button>
+          </Link>
         </div>
       </div>
     </div>
