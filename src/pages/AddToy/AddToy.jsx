@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const AddToy = () => {
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const addToyHandler = async (event) => {
     event.preventDefault();
@@ -41,7 +41,7 @@ const AddToy = () => {
       .then((data) => {
         if (data.insertedId) {
           alert("Toy Added Successfully");
-          navigate(`/mytoys`, { replace: true })
+          navigate(`/mytoys`, { replace: true });
         }
       });
   };
