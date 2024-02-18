@@ -1,6 +1,6 @@
 <h2>GoPlay</h2>
 
-Live Website: https://goplay-3b4be.web.app
+Live Website: 
 <br/>
 Frontend repository: https://github.com/programming-hero-web-course-4/b7a11-toy-marketplace-client-side-mdiktushar
 <br/>
